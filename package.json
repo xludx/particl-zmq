@@ -1,10 +1,10 @@
 {
-  "name": "bitcoind-zmq",
-  "version": "1.0.2",
-  "description": "Get ZMQ notifications from bitcoind-like coins",
+  "name": "particl-zmq",
+  "version": "1.0.3",
+  "description": "Get ZMQ notifications from particld",
   "main": "index.js",
   "scripts": {
-    "test": "standard"
+    "lint": "eslint \"**/*.{js,jsx}\""
   },
   "keywords": [
     "coin",
@@ -18,12 +18,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ExodusMovement/bitcoind-zmq.git"
+    "url": "https://github.com/xludx/particl-zmq.git"
   },
   "bugs": {
-    "url": "https://github.com/ExodusMovement/bitcoind-zmq/issues"
+    "url": "https://github.com/xludx/particl-zmq/issues"
   },
-  "author": "Rocco Musolino (@roccomuso)",
+  "author": "Juha Kovanen (juha@particl.io)",
   "license": "MIT",
   "dependencies": {
     "debug": "^4.1.0",
@@ -31,9 +31,27 @@
     "zeromq": "^5.1.0"
   },
   "devDependencies": {
-    "standard": "^13.0.2"
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.4.0",
+    "eslint-config-google": "^0.14.0"
   },
   "engines": {
     "node": ">=10.*.*"
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "eslint:recommended"
+    ],
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "rules": {
+      "comma-dangle": "off",
+      "no-unused-vars": "warn",
+      "no-console": "warn",
+      "no-unexpected-multiline": "warn"
+    }
   }
 }
