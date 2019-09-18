@@ -1,6 +1,6 @@
 {
   "name": "particl-zmq",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Get ZMQ notifications from particld",
   "main": "index.js",
   "scripts": {
