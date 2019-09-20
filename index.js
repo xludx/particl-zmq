@@ -1,1 +1,1 @@
-module.exports = require('./lib/Zmq')
+module.exports = require('./lib/Zmq');

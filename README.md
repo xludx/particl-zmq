@@ -4,65 +4,80 @@
 ![node](https://img.shields.io/node/v/bitcoind-zmq.svg)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-> Get ZMQ notifications from bitcoind-like coins
+> Get ZMQ notifications from particld
 
 ## Install
 
-> npm install --save bitcoind-zmq
+> npm install --save particl-zmq
 
-And make sure to run bitcoind or whatever btc-like coin (that support zmq) with his [zmq options](https://github.com/bitcoin/bitcoin/blob/master/doc/zmq.md).
+And make sure to run particld with its [zmq options](https://github.com/particl/particl-core/blob/master/doc/zmq.md).
 
-> bitcoind -zmqpubhashtx=tcp://127.0.0.1:28332 -zmqpubhashblock=tcp://127.0.0.1:28332
+> particld -zmqpubsmsg=tcp://127.0.0.1:28333 -zmqpubhashtx=tcp://127.0.0.1:28333 -zmqpubhashblock=tcp://127.0.0.1:28333
 
 ## Usage example
 
 ```javascript
-const BitcoindZmq = require('bitcoind-zmq')
+const ParticlZmq = require('particl-zmq');
 
-const opts = { maxRetry: 20 }
+const opts = { maxRetry: 20 };
 
-const btcd = new BitcoindZmq({
+const particld = new ParticlZmq({
   // topic: <zmq node>
-  hashtx: 'tcp://127.0.0.1:28332',
-  hashblock: 'tcp://127.0.0.1:28332',
-  rawtx: 'tcp://127.0.0.1:28334',
-  rawblock: 'tcp://127.0.0.1:28334'
-}, opts)
+  smsg: 'tcp://127.0.0.1:28333',
+  hashtx: 'tcp://127.0.0.1:28333',
+  hashblock: 'tcp://127.0.0.1:28333',
+  rawtx: 'tcp://127.0.0.1:28333',
+  rawblock: 'tcp://127.0.0.1:28333'
 
-btcd.connect()
+}, opts);
 
-btcd.on('hashblock', (hash) => {
+particld.connect();
+
+particld.on('smsg', (msgid) => {
   // hash <Buffer ... />
-})
+  console.log(msgid.toString('hex'));
+});
 
-btcd.on('hashtx', (hash) => {
+particld.on('hashblock', (hash) => {
   // hash <Buffer ... />
-})
+  console.log(hash.toString('hex'));
+});
 
-btcd.on('rawblock', (block) => {
+particld.on('hashtx', (hash) => {
+  // hash <Buffer ... />
+  console.log(hash.toString('hex'));
+});
+
+particld.on('rawblock', (block) => {
   // block <Buffer ... />
-})
+  console.log(block.toString('hex'));
+});
 
-btcd.on('rawtx', (tx) => {
+particld.on('rawtx', (tx) => {
   // tx <Buffer ... />
-})
+  console.log(tx.toString('hex'));
+});
 
-btcd.on('connect:*', (uri, type) => {
-  console.log(`socket ${type} connected to ${uri}`)
-})
+particld.on('connect:*', (uri, type) => {
+  console.log(`socket ${type} connected to ${uri}`);
+});
 
-btcd.on('retry:hashtx', (type, attempt) => {
-  console.log(`hashtx, connect retry attempt: ${attempt}`)
-})
+particld.on('close:*', (uri, type) => {
+  console.log(`socket ${type} closed to ${uri}`);
+});
 
-btcd.on('error:*', (err, type) => {
-  console.error(`${type} had error:`, err)
-})
+particld.on('retry:hashtx', (type, attempt) => {
+  console.log(`hashtx, connect retry attempt: ${attempt}`);
+});
+
+particld.on('error:*', (err, type) => {
+  console.error(`${type} had error:`, err);
+});
 ```
 
 ### API
 
-The `BitcoindZMQ({...}, <opts>)` Class accepts in his constructor `topic -> zmq node` pairs. The only option available is `maxRetry` the maximum n. of attempt to connect to a zmq node.
+The `ParticlZMQ({...}, <opts>)` Class accepts in his constructor `topic -> zmq node` pairs. The only option available is `maxRetry` the maximum n. of attempt to connect to a zmq node.
 
 - `.add(<type>, <uri>)`: Add a `topic -> zmq node` pair (ex. `.add('hashtx', 'tcp://127.0.0.1:28333')`).
 - `.on(<eventName>, <fn>)`: the event name could be a [EventEmitter2](https://github.com/EventEmitter2/EventEmitter2) pattern with namespaces (ex. `.on('connect:hashtx', () => console.log('watching hashtx'))`).
@@ -71,12 +86,13 @@ The `BitcoindZMQ({...}, <opts>)` Class accepts in his constructor `topic -> zmq 
 
 Also refer to the example for usage.
 
-*Bitcoind* available events are these below. You can add new coins' events or get rid of those you don't need when instantiating the Class:
+*Particld* available events are these below. You can add new coins' events or get rid of those you don't need when instantiating the Class:
 
 - `hashblock`
 - `hashtx`
 - `rawblock`
 - `rawtx`
+- `smsg`
 
 **Reserved events and namespaces**:
 
@@ -89,7 +105,7 @@ Also refer to the example for usage.
 
 ### Debug
 
-> DEBUG=bitcoind-zmq
+> DEBUG=particl-zmq
 
 ### License
 

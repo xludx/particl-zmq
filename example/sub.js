@@ -1,42 +1,43 @@
-const BitcoindZmq = require('../')
 
-const btcd = new BitcoindZmq({
+const ParticlZmq = require('../');
+
+const particld = new ParticlZmq({
   hashtx: 'tcp://127.0.0.1:28332',
   rawblock: 'tcp://127.0.0.1:28332',
   hashblock: 'tcp://127.0.0.1:28333',
   rawtx: 'tcp://127.0.0.1:28334'
-})
+});
 
-btcd.connect()
+particld.connect();
 
-btcd.on('hashblock', (hash) => {
-  console.log('got block hash:', hash) // hash <Buffer ... />
-})
+particld.on('hashblock', (hash) => {
+  console.log('got block hash:', hash); // hash <Buffer ... />
+});
 
-btcd.on('hashtx', (hash) => {
-  console.log('got tx hash:', hash) // hash <Buffer ... />
-})
+particld.on('hashtx', (hash) => {
+  console.log('got tx hash:', hash); // hash <Buffer ... />
+});
 
-btcd.on('rawblock', (block) => {
-  console.log('got raw block:', block) // block <Buffer ... />
-})
+particld.on('rawblock', (block) => {
+  console.log('got raw block:', block); // block <Buffer ... />
+});
 
-btcd.on('rawtx', (tx) => {
-  console.log('got raw tx:', tx) // tx <Buffer ... />
-})
+particld.on('rawtx', (tx) => {
+  console.log('got raw tx:', tx); // tx <Buffer ... />
+});
 
-btcd.on('connect:*', (uri, type) => {
-  console.log(`socket ${type} connected to ${uri}`)
-})
+particld.on('connect:*', (uri, type) => {
+  console.log(`socket ${type} connected to ${uri}`);
+});
 
-btcd.on('error:*', (err, type) => {
-  console.error(`${type} had error:`, err)
-})
+particld.on('error:*', (err, type) => {
+  console.error(`${type} had error:`, err);
+});
 
-btcd.on('retry:*', (type, attempt) => {
-  console.log(`type: ${type}, retry attempt: ${attempt}`)
-})
+particld.on('retry:*', (type, attempt) => {
+  console.log(`type: ${type}, retry attempt: ${attempt}`);
+});
 
-btcd.on('close:*', (err, type) => {
-  console.log(`close ${type}`, err || '')
-})
+particld.on('close:*', (err, type) => {
+  console.log(`close ${type}`, err || '');
+});
