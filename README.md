@@ -1,8 +1,4 @@
-# bitcoind-zmq
-
-[![NPM Version](https://img.shields.io/npm/v/bitcoind-zmq.svg)](https://www.npmjs.com/package/bitcoind-zmq)
-![node](https://img.shields.io/node/v/bitcoind-zmq.svg)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+# particl-zmq
 
 > Get ZMQ notifications from particld
 
