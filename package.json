@@ -1,6 +1,6 @@
 {
-  "name": "bitcoind-zmq",
-  "version": "1.0.2",
+  "name": "particld-zmq",
+  "version": "1.0.3",
   "description": "Get ZMQ notifications from bitcoind-like coins",
   "main": "index.js",
   "scripts": {
@@ -18,22 +18,22 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ExodusMovement/bitcoind-zmq.git"
+    "url": "https://github.com/xludx/particld-zmq.git"
   },
   "bugs": {
-    "url": "https://github.com/ExodusMovement/bitcoind-zmq/issues"
+    "url": "https://github.com/zludx/particld-zmq/issues"
   },
   "author": "Rocco Musolino (@roccomuso)",
   "license": "MIT",
   "dependencies": {
     "debug": "^4.1.0",
     "eventemitter2": "^5.0.1",
-    "zeromq": "^5.1.0"
+    "zeromq": "^6.0.0-beta.6"
   },
   "devDependencies": {
     "standard": "^13.0.2"
   },
   "engines": {
-    "node": ">=10.*.*"
+    "node": ">=12.*.*"
   }
 }
