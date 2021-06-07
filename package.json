@@ -1,6 +1,6 @@
 {
   "name": "particl-zmq",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Get ZMQ notifications from particld",
   "main": "index.js",
   "scripts": {
@@ -28,7 +28,7 @@
   "dependencies": {
     "debug": "^4.1.0",
     "eventemitter2": "^5.0.1",
-    "zeromq": "^6.0.0-beta.6"
+    "zeromq": "^5.2.8"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
